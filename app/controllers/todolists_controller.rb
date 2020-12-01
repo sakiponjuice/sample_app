@@ -2,31 +2,32 @@ class TodolistsController < ApplicationController
   def new
     @list = List.new
   end
-  
-  def index
+
+ def index
+    puts "作成したキー #{ENV['SECRET_KEY']}"
     @lists = List.all
-  end
-  
+ end
+
   def show
-    @list = List.find(params[:id])  
+    @list = List.find(params[:id])
   end
-  
+
   def create
     list = List.new(list_params)
     list.save
     redirect_to todolist_path(list.id)
   end
-  
+
   def edit
     @list = List.find(params[:id])
   end
-  
+
   def update
     list = List.find(params[:id])
     list.update(list_params)
-    redirect_to todolist_path(list.id)  
+    redirect_to todolist_path(list.id)
   end
-  
+
   def destroy
     list = List.find(params[:id])
     list.destroy
